@@ -1,82 +1,105 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "wouter";
 
 interface BlogLayoutProps {
   children: React.ReactNode;
-  sidebar?: React.ReactNode;
 }
 
-export default function BlogLayout({ children, sidebar }: BlogLayoutProps) {
+export default function BlogLayout({ children }: BlogLayoutProps) {
   const { theme, toggleTheme } = useTheme();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-primary">
-              <a href="/" className="hover:text-primary/80 transition-colors">
-                Thiago's Java Blog
-              </a>
-            </h1>
-          </div>
+      <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-sm">
+        <div className="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/">
+            <a className="text-base font-semibold tracking-tight text-foreground hover:text-primary transition-colors">
+              thiago<span className="text-primary font-bold">.</span>dev
+            </a>
+          </Link>
 
-          <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
+          {/* Desktop Nav */}
+          <nav className="hidden sm:flex items-center gap-1">
+            {[
+              { label: "Home", href: "/" },
+              { label: "Tibia", href: "/category/Tibia" },
+              { label: "Programação", href: "/category/Programação" },
+            ].map(({ label, href }) => (
+              <Link key={href} href={href}>
+                <a className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-secondary transition-colors">
+                  {label}
+                </a>
+              </Link>
+            ))}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md hover:bg-secondary transition-colors"
-              aria-label="Toggle theme"
+              className="ml-1 p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors text-base"
+              aria-label={theme === "dark" ? "Modo claro" : "Modo escuro"}
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
+          </nav>
 
-            {/* Mobile Menu Toggle */}
+          {/* Mobile controls */}
+          <div className="flex sm:hidden items-center gap-1">
             <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="md:hidden p-2 rounded-md hover:bg-secondary transition-colors"
-              aria-label="Toggle menu"
+              onClick={toggleTheme}
+              className="p-1.5 rounded-md text-muted-foreground hover:bg-secondary transition-colors text-base"
             >
-              {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-1.5 rounded-md text-muted-foreground hover:bg-secondary transition-colors"
+            >
+              {menuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="sm:hidden border-t border-border bg-background px-6 py-3 space-y-0.5">
+            {[
+              { label: "Home", href: "/" },
+              { label: "Tibia", href: "/category/Tibia" },
+              { label: "Programação", href: "/category/Programação" },
+            ].map(({ label, href }) => (
+              <Link key={href} href={href}>
+                <a
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-secondary transition-colors"
+                >
+                  {label}
+                </a>
+              </Link>
+            ))}
+          </div>
+        )}
       </header>
 
-      <div className="flex flex-col md:flex-row max-w-6xl mx-auto">
-        {/* Sidebar */}
-        {sidebar && (
-          <>
-            {/* Desktop Sidebar */}
-            <aside className="hidden md:block w-64 border-r border-border bg-card">
-              <div className="sticky top-20 p-6">{sidebar}</div>
-            </aside>
-
-            {/* Mobile Sidebar */}
-            {sidebarOpen && (
-              <aside className="md:hidden w-full border-b border-border bg-card p-6">
-                {sidebar}
-              </aside>
-            )}
-          </>
-        )}
-
-        {/* Main Content */}
-        <main className="flex-1 px-4 py-8 md:px-8">
-          <article className="max-w-3xl mx-auto">{children}</article>
-        </main>
-      </div>
+      {/* Main content */}
+      <main className="flex-1 max-w-2xl mx-auto w-full px-6 py-12">
+        {children}
+      </main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card mt-16">
-        <div className="max-w-6xl mx-auto px-4 py-8 text-center text-sm text-muted-foreground">
-          <p>
-            © 2026 Thiago's Java Learning Blog. Built with React, TypeScript,
-            and deployed on GitHub Pages.
-          </p>
+      <footer className="border-t border-border">
+        <div className="max-w-2xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
+          <p>© 2026 Thiago B.</p>
+          <a
+            href="https://github.com/othiagob"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors"
+          >
+            github.com/othiagob
+          </a>
         </div>
       </footer>
     </div>

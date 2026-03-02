@@ -9,51 +9,68 @@ export interface Post {
   readingTime: number;
 }
 
+const CATEGORY_STYLES: Record<string, string> = {
+  Tibia: "bg-amber-500/15 text-amber-400 dark:text-amber-400",
+  Programação: "bg-violet-500/15 text-violet-500 dark:text-violet-400",
+  Fundamentos: "bg-sky-500/15 text-sky-500 dark:text-sky-400",
+  Java: "bg-orange-500/15 text-orange-500 dark:text-orange-400",
+};
+
+function categoryStyle(cat: string) {
+  return CATEGORY_STYLES[cat] ?? "bg-secondary text-muted-foreground";
+}
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr + "T12:00:00").toLocaleDateString("pt-BR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 interface PostListProps {
   posts: Post[];
 }
 
 export default function PostList({ posts }: PostListProps) {
   return (
-    <div className="space-y-8">
+    <ul className="divide-y divide-border">
       {posts.map((post) => (
-        <article
-          key={post.slug}
-          className="pb-8 border-b border-border last:border-b-0 hover:bg-secondary/30 transition-colors p-4 rounded-lg"
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <Link href={`/posts/${post.slug}`}>
-                <a className="no-underline hover:no-underline">
-                  <h2 className="text-2xl font-bold text-foreground hover:text-primary transition-colors">
-                    {post.title}
-                  </h2>
-                </a>
-              </Link>
+        <li key={post.slug}>
+          <Link href={`/posts/${post.slug}`}>
+            <a className="group flex items-start justify-between gap-4 py-6 transition-all">
+              <div className="flex-1 min-w-0">
+                {/* Meta */}
+                <div className="flex items-center flex-wrap gap-2 mb-2.5">
+                  <span
+                    className={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryStyle(post.category)}`}
+                  >
+                    {post.category}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {formatDate(post.date)} · {post.readingTime} min
+                  </span>
+                </div>
 
-              <p className="text-muted-foreground text-sm mt-2">
-                <span className="font-semibold">{post.date}</span>
-                {" · "}
-                <span className="inline-block px-2 py-1 bg-primary/10 text-primary rounded text-xs font-medium mt-1">
-                  {post.category}
-                </span>
-                {" · "}
-                <span>{post.readingTime} min read</span>
-              </p>
+                {/* Title */}
+                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors leading-snug mb-1.5 text-base sm:text-lg">
+                  {post.title}
+                </h3>
 
-              <p className="text-foreground/80 mt-4 leading-relaxed">
-                {post.excerpt}
-              </p>
+                {/* Excerpt */}
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                  {post.excerpt}
+                </p>
+              </div>
 
-              <Link href={`/posts/${post.slug}`}>
-                <a className="inline-block mt-4 text-primary font-semibold hover:underline">
-                  Read more →
-                </a>
-              </Link>
-            </div>
-          </div>
-        </article>
+              {/* Arrow */}
+              <span className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all mt-1 flex-shrink-0">
+                →
+              </span>
+            </a>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

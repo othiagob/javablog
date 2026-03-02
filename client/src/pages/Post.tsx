@@ -1,138 +1,134 @@
 import BlogLayout from "@/components/BlogLayout";
-import BlogSidebar from "@/components/BlogSidebar";
 import { usePosts } from "@/hooks/usePosts";
 import { Streamdown } from "streamdown";
-import { useRoute } from "wouter";
+import { useRoute, Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
-import { Link } from "wouter";
 
-/**
- * Post Page - Individual Blog Post
- * Design Philosophy: Modernismo Tipográfico Minimalista
- * - Markdown content rendered with Streamdown
- * - Generous line-height for readability
- * - Clean typography with Playfair Display headings
- * - Forest green accents for links and highlights
- */
+const CATEGORY_STYLES: Record<string, string> = {
+  Tibia: "bg-amber-500/15 text-amber-400",
+  Programação: "bg-violet-500/15 text-violet-400",
+  Fundamentos: "bg-sky-500/15 text-sky-400",
+  Java: "bg-orange-500/15 text-orange-400",
+};
+
+function categoryStyle(cat: string) {
+  return CATEGORY_STYLES[cat] ?? "bg-secondary text-muted-foreground";
+}
 
 export default function Post() {
   const [match, params] = useRoute("/posts/:slug");
-  const { posts, getPostBySlug, getCategories } = usePosts();
+  const { posts, getPostBySlug } = usePosts();
 
   if (!match) return null;
 
   const post = getPostBySlug(params?.slug);
-  const categories = getCategories();
 
   if (!post) {
     return (
       <BlogLayout>
-        <div className="text-center py-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            Post não encontrado
-          </h1>
-          <p className="text-muted-foreground mb-6">
-            Desculpe, não conseguimos encontrar o post que você está procurando.
-          </p>
+        <div className="text-center py-20">
+          <p className="text-muted-foreground text-sm mb-6">Post não encontrado.</p>
           <Link href="/">
-            <a className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-              Voltar para Home
-            </a>
+            <a className="text-sm text-primary hover:underline">← Voltar para home</a>
           </Link>
         </div>
       </BlogLayout>
     );
   }
 
-  const sidebarPosts = posts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    category: p.category,
-  }));
+  const related = posts
+    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .slice(0, 2);
 
   return (
-    <BlogLayout
-      sidebar={<BlogSidebar posts={sidebarPosts} categories={categories} />}
-    >
-      {/* Back Button */}
+    <BlogLayout>
+      {/* Back link */}
       <Link href="/">
-        <a className="inline-flex items-center gap-2 text-primary hover:underline mb-8 font-medium">
-          <ArrowLeft size={18} />
-          Voltar
+        <a className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10">
+          <ArrowLeft size={13} />
+          Todos os posts
         </a>
       </Link>
 
-      {/* Post Header */}
-      <header className="mb-12">
-        <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-4">
-          {post.title}
-        </h1>
-
-        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-          <time dateTime={post.date} className="font-semibold">
-            {new Date(post.date).toLocaleDateString("pt-BR", {
+      {/* Post header */}
+      <header className="mb-10">
+        <div className="flex items-center flex-wrap gap-2.5 mb-4">
+          <span
+            className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${categoryStyle(post.category)}`}
+          >
+            {post.category}
+          </span>
+          <time className="text-xs text-muted-foreground">
+            {new Date(post.date + "T12:00:00").toLocaleDateString("pt-BR", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
           </time>
-
-          <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded font-medium">
-            {post.category}
+          <span className="text-xs text-muted-foreground">
+            {post.readingTime} min de leitura
           </span>
-
-          <span>{post.readingTime} min de leitura</span>
         </div>
 
-        {/* Divider */}
-        <div className="mt-8 border-t border-border" />
+        <h1
+          className="text-3xl sm:text-4xl font-bold text-foreground leading-tight mb-4"
+          style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+        >
+          {post.title}
+        </h1>
+
+        {post.excerpt && (
+          <p className="text-base text-muted-foreground leading-relaxed">
+            {post.excerpt}
+          </p>
+        )}
       </header>
 
-      {/* Post Content */}
-      <div className="prose prose-lg max-w-none mb-12">
+      <div className="border-t border-border mb-10" />
+
+      {/* Post content */}
+      <div className="prose-content">
         <Streamdown>{post.content}</Streamdown>
       </div>
 
-      {/* Footer */}
-      <div className="mt-16 pt-8 border-t border-border">
-        <div className="bg-primary/5 p-6 rounded-lg border border-primary/20">
-          <h3 className="text-lg font-bold text-foreground mb-2">
-            Sobre o autor
-          </h3>
-          <p className="text-foreground/70">
-            Thiago é um estudante de Ciência da Computação aprendendo
-            autodidatamente TypeScript, Node.js e React. Este blog documenta
-            sua jornada de aprendizado em Java e outras tecnologias.
-          </p>
+      {/* Author card */}
+      <div className="mt-14 pt-8 border-t border-border">
+        <div className="flex items-start gap-4">
+          <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm flex-shrink-0 border border-primary/30">
+            T
+          </div>
+          <div>
+            <p className="font-semibold text-foreground text-sm">Thiago B.</p>
+            <p className="text-sm text-muted-foreground mt-0.5 leading-relaxed">
+              Desenvolvedor em formação, estudante de programação e explorador
+              de Tibia. Este blog é meu diário de aprendizado.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Related Posts */}
-      <div className="mt-12">
-        <h2 className="text-3xl font-bold text-foreground mb-6">
-          Posts Relacionados
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {posts
-            .filter(
-              (p) => p.category === post.category && p.slug !== post.slug
-            )
-            .slice(0, 2)
-            .map((relatedPost) => (
-              <Link key={relatedPost.slug} href={`/posts/${relatedPost.slug}`}>
-                <a className="block p-4 border border-border rounded-lg hover:border-primary hover:bg-primary/5 transition-all group">
-                  <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
-                    {relatedPost.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {relatedPost.excerpt}
+      {/* Related posts */}
+      {related.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-5">
+            Posts relacionados
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {related.map((rp) => (
+              <Link key={rp.slug} href={`/posts/${rp.slug}`}>
+                <a className="group block p-4 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-all">
+                  <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
+                    {rp.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1.5 line-clamp-2 leading-relaxed">
+                    {rp.excerpt}
                   </p>
                 </a>
               </Link>
             ))}
+          </div>
         </div>
-      </div>
+      )}
     </BlogLayout>
   );
 }
