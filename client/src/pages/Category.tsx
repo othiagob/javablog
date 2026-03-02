@@ -16,23 +16,23 @@ export default function Category() {
   return (
     <BlogLayout>
       <Link href="/">
-        <a className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10">
-          <ArrowLeft size={13} />
-          Todos os posts
+        <a className="inline-flex items-center gap-1.5 text-[0.8rem] text-muted-foreground hover:text-foreground transition-colors duration-150 mb-12">
+          <ArrowLeft size={12} strokeWidth={2} />
+          Todas as publicações
         </a>
       </Link>
 
       <header className="mb-10">
-        <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-2">
+        <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-muted-foreground mb-2">
           Categoria
         </p>
         <h1
-          className="text-3xl sm:text-4xl font-bold text-foreground mb-2"
-          style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+          className="text-[2rem] font-bold text-foreground tracking-[-0.025em]"
+          style={{ fontFamily: "var(--font-display)" }}
         >
           {category}
         </h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-[0.85rem] text-muted-foreground mt-1.5">
           {categoryPosts.length} post{categoryPosts.length !== 1 ? "s" : ""}
         </p>
       </header>
@@ -42,7 +42,7 @@ export default function Category() {
       {categoryPosts.length > 0 ? (
         <PostList posts={categoryPosts} />
       ) : (
-        <p className="text-muted-foreground text-center py-12 text-sm">
+        <p className="text-sm text-muted-foreground text-center py-10">
           Nenhum post nesta categoria ainda.
         </p>
       )}
