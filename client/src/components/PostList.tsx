@@ -27,37 +27,34 @@ export default function PostList({ posts }: PostListProps) {
       {posts.map((post) => (
         <li key={post.slug} className="post-item">
           <Link href={`/posts/${post.slug}`}>
-            <a className="group flex items-start justify-between gap-4">
-              <div className="flex-1 min-w-0">
+            <a className="group block">
 
-                {/* Meta row */}
-                <div className="flex items-center flex-wrap gap-2 mb-2">
-                  <span className="cat-badge" data-cat={post.category}>
-                    {post.category}
-                  </span>
-                  <span className="text-[0.75rem] text-muted-foreground tabular-nums">
-                    {formatDate(post.date)}
-                  </span>
-                  <span className="text-[0.75rem] text-muted-foreground">
-                    {post.readingTime} min
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-[1rem] font-semibold text-foreground group-hover:text-primary transition-colors duration-150 leading-snug mb-1.5">
-                  {post.title}
-                </h3>
-
-                {/* Excerpt */}
-                <p className="text-[0.875rem] text-muted-foreground leading-relaxed line-clamp-2">
-                  {post.excerpt}
-                </p>
+              {/* Meta row */}
+              <div className="flex items-center gap-2.5 mb-2">
+                <span className="cat-badge" data-cat={post.category}>
+                  {post.category}
+                </span>
+                <span className="text-[0.73rem] text-muted-foreground tabular-nums">
+                  {formatDate(post.date)}
+                </span>
+                <span className="text-[0.73rem] text-muted-foreground">
+                  · {post.readingTime} min
+                </span>
               </div>
 
-              {/* Arrow */}
-              <span className="text-[0.9rem] text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-150 mt-1 flex-shrink-0 select-none">
-                →
-              </span>
+              {/* Title — the most important element */}
+              <h3
+                className="text-[1.1rem] font-bold text-foreground group-hover:text-primary transition-colors duration-150 leading-[1.3] mb-2 tracking-tight"
+                style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.015em" }}
+              >
+                {post.title}
+              </h3>
+
+              {/* Excerpt */}
+              <p className="text-[0.875rem] text-muted-foreground leading-relaxed line-clamp-2">
+                {post.excerpt}
+              </p>
+
             </a>
           </Link>
         </li>
