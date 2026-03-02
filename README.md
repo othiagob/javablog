@@ -10,10 +10,11 @@ Blog pessoal de Thiago B. — programação, Java e Tibia.
 
 ```
 blog/
+├── WIKI/              → Documentação de cada pasta do projeto
 ├── assets/            → CSS (Tailwind) — estilos do tema
 ├── exampleSite/       → O site em si: configuração e conteúdo
-│   ├── hugo.toml      → Configuração principal do blog
-│   └── content/       → Todos os textos e posts do blog
+│   ├── hugo.toml      → Configuração principal do blog ← edite aqui
+│   └── content/       → Todos os textos e posts ← edite aqui
 ├── i18n/              → Traduções da interface
 ├── layouts/           → Templates HTML que geram as páginas
 ├── static/            → Arquivos públicos (ícones, imagens, JS)
@@ -23,20 +24,10 @@ blog/
 └── postcss.config.mjs → Configuração do processador de CSS
 ```
 
-## Como funciona o deploy
+## Documentação
 
-Todo push na branch `main` dispara o GitHub Actions automaticamente:
-1. Compila o CSS com PostCSS (Tailwind)
-2. Gera o site estático com Hugo
-3. Publica no GitHub Pages
+Toda a documentação detalhada está na pasta **[WIKI/](./WIKI/index.md)**.
 
-## Como editar o blog
+## Deploy
 
-Para a maioria das mudanças, você só precisa editar arquivos dentro de `exampleSite/`.
-Veja o README de cada pasta para saber exatamente o que cada arquivo faz.
-
-## Dependências de desenvolvimento
-
-- [Hugo Extended](https://gohugo.io/) — gerador de site estático
-- [Bun](https://bun.sh/) — runtime para scripts e instalação de pacotes
-- [Tailwind CSS v4](https://tailwindcss.com/) — framework de CSS
+Todo push na branch `main` publica o site automaticamente via GitHub Actions.
