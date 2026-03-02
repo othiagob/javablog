@@ -1,5 +1,5 @@
-baseURL = "https://othiagob.github.io/javablog/"
-title = "Public Java"
+baseURL = "https://othiagob.github.io/javac/"
+title = "String[] args"
 author = "Thiago B."
 copyright = "© 2026, Public Java"
 languageCode = "pt-BR"
