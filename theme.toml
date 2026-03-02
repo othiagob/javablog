@@ -1,5 +1,5 @@
 name = "Paper"
 license = "MIT"
-licenselink = "https://github.com/nanxiaobei/hugo-paper/blob/main/LICENSE"
+licenselink = "https://github.com/othiagob/javac/blob/main/LICENSE"
 description = "Tema simples e limpo para blogs Hugo"
 min_version = "0.57.1"
