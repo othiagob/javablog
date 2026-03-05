@@ -1,78 +1,48 @@
 #!/bin/bash
-# EXECUTE ESTE SCRIPT PARA LIMPAR O REPOSITÓRIO
-# Uso: bash EXECUTAR-LIMPEZA.sh
+# Script de limpeza completa do repositório
+# Executa a remoção de todos os arquivos desnecessários
 
 set -e
 
-echo "==========================================="
-echo "🧹 LIMPEZA AUTOMÁTICA DO REPOSITÓRIO"
-echo "==========================================="
+echo "🧹 Limpeza do repositório..."
 echo ""
-
-# Função para remover com feedback
-remove_item() {
-    local item="$1"
-    if [ -e "$item" ]; then
-        echo "✓ Removendo: $item"
-        rm -rf "$item"
-    else
-        echo "⊘ Não existe: $item"
-    fi
-}
 
 # PASTAS GERADAS
-echo "📁 Removendo pastas geradas..."
-remove_item "public"
-remove_item "resources"
-remove_item "exampleSite/public"
+rm -rf public 2>/dev/null || true
+rm -rf resources 2>/dev/null || true
+rm -rf exampleSite/public 2>/dev/null || true
 
 # ARQUIVOS TEMPORÁRIOS
-echo ""
-echo "📄 Removendo arquivos temporários..."
-remove_item ".hugo_build.lock"
-remove_item "exampleSite/.hugo_build.lock"
+rm -f .hugo_build.lock 2>/dev/null || true
+rm -f exampleSite/.hugo_build.lock 2>/dev/null || true
 
 # ARQUIVOS REDUNDANTES
-echo ""
-echo "🗑️  Removendo arquivos redundantes..."
-remove_item "exampleSite/configTaxo.toml"
-remove_item "exampleSite/go.toml"
-remove_item "exampleSite/LICENSE"
-remove_item "exampleSite/go.mod"
+rm -f exampleSite/configTaxo.toml 2>/dev/null || true
+rm -f exampleSite/go.toml 2>/dev/null || true
+rm -f exampleSite/LICENSE 2>/dev/null || true
+rm -f exampleSite/go.mod 2>/dev/null || true
 
-# ARQUIVOS DE DOCUMENTAÇÃO DO PROCESSO (OPCIONAL)
-echo ""
-echo "📋 Removendo arquivos de documentação do processo..."
-remove_item "cleanup.sh"
-remove_item "ARQUIVOS-PARA-REMOVER.md"
-remove_item "RESUMO-DA-LIMPEZA.md"
+# IMAGENS DESNECESSÁRIAS (não utilizadas no projeto)
+rm -f images/java.png 2>/dev/null || true
+rm -f images/pagespeed.png 2>/dev/null || true
+rm -f images/screenshot.png 2>/dev/null || true
+rm -f images/screenshot_dark.png 2>/dev/null || true
+rm -f images/tn.png 2>/dev/null || true
 
+# DOCUMENTAÇÃO DESNECESSÁRIA (criada no processo de análise)
+rm -f GUIA-DO-REPOSITORIO.md 2>/dev/null || true
+rm -f ARQUIVOS-PARA-REMOVER.md 2>/dev/null || true
+rm -f RESUMO-DA-LIMPEZA.md 2>/dev/null || true
+rm -f REFERENCIA-RAPIDA.md 2>/dev/null || true
+rm -f EXECUTAR-AGORA.md 2>/dev/null || true
+rm -f cleanup.sh 2>/dev/null || true
+
+echo "✅ Limpeza concluída!"
 echo ""
-echo "==========================================="
-echo "✅ LIMPEZA CONCLUÍDA!"
-echo "==========================================="
+echo "Próximos passos:"
 echo ""
-echo "📋 PRÓXIMOS PASSOS:"
-echo ""
-echo "1. Remover do Git (arquivos que já foram commitados):"
-echo "   git rm -r --cached public/ 2>/dev/null || true"
-echo "   git rm -r --cached resources/ 2>/dev/null || true"
-echo "   git rm -r --cached exampleSite/public/ 2>/dev/null || true"
-echo "   git rm --cached exampleSite/configTaxo.toml 2>/dev/null || true"
-echo "   git rm --cached exampleSite/go.toml 2>/dev/null || true"
-echo "   git rm --cached exampleSite/LICENSE 2>/dev/null || true"
-echo "   git rm --cached exampleSite/go.mod 2>/dev/null || true"
-echo ""
-echo "2. Verificar status:"
-echo "   git status"
-echo ""
-echo "3. Adicionar mudanças:"
-echo "   git add ."
-echo ""
-echo "4. Commit:"
-echo "   git commit -m \"chore: limpeza do repositório - removidos arquivos gerados e redundantes\""
-echo ""
-echo "5. Push:"
-echo "   git push origin main"
-echo ""
-echo "🎉 Repositório limpo e pronto para commit!"
+echo "git rm -r --cached public/ resources/ exampleSite/public/ 2>/dev/null || true"
+echo "git rm --cached exampleSite/{configTaxo.toml,go.toml,LICENSE,go.mod} 2>/dev/null || true"
+echo "git add ."
+echo "git commit -m \"chore: limpeza do repositório - removidos arquivos desnecessários\""
+echo "git push origin main"
