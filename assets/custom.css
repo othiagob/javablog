@@ -1,13 +1,20 @@
 /* Place custom css here. */
 @reference './app.css';
 
-:root {
+:root:not(#\#),
+:host:not(#\#) {
 	--font-sans: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	--default-font-family: var(--font-sans);
 	--default-mono-font-family: var(--font-sans);
 	--dot-size: 22px;
 	--dot-opacity-light: 0.11;
 	--dot-opacity-dark: 0.14;
+}
+
+html,
+body,
+body * {
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
 }
 
 body {
