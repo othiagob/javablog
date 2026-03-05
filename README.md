@@ -4,8 +4,6 @@ Blog pessoal de Thiago B. — programação, Java e Tibia.
 
 **Acesse:** https://othiagob.github.io/javac/
 
-> ✨ **Última atualização:** 05/03/2026 - Reorganização estrutural concluída
-
 ---
 
 ## 🚀 Quick Start
@@ -31,7 +29,7 @@ O site estará disponível em: http://localhost:1313/javac/
 javac/
 ├── WIKI/              → Documentação detalhada de cada pasta
 ├── assets/            → CSS (Tailwind) — estilos do tema
-├── exampleSite/       → ⭐ O site em si: configuração e conteúdo
+├── site/              → ⭐ O site em si: configuração e conteúdo
 │   ├── hugo.toml      → Configuração principal do blog ← edite aqui
 │   └── content/       → Todos os textos e posts ← edite aqui
 ├── i18n/              → Traduções da interface (pt-br, en, es...)
@@ -58,7 +56,7 @@ chmod +x cleanup.sh
 **O script remove:**
 - `/public/` - Site compilado (gerado no build)
 - `/resources/` - Cache do Hugo
-- `exampleSite/public/` - Build local
+- `site/public/` - Build local
 - Arquivos de configuração duplicados/obsoletos
 
 **✅ Após a limpeza:** Os arquivos gerados não serão mais commitados graças ao `.gitignore` atualizado.
@@ -67,7 +65,7 @@ chmod +x cleanup.sh
 
 ## 📝 Como Criar um Post
 
-1. Crie um arquivo `.md` em `exampleSite/content/post/`:
+1. Crie um arquivo `.md` em `site/content/post/`:
    ```markdown
    ---
    title: "Meu Novo Post"
@@ -119,7 +117,7 @@ Todo push na branch `main` **publica automaticamente** via GitHub Actions:
 ## 🎨 Personalização
 
 ### Mudar cor do tema
-Edite `exampleSite/hugo.toml`:
+Edite `site/hugo.toml`:
 ```toml
 [params]
   color = 'linen'  # opções: wheat, gray, light, dark, etc.
@@ -132,7 +130,7 @@ bun run build:css
 ```
 
 ### Adicionar página ao menu
-Edite `exampleSite/hugo.toml`:
+Edite `site/hugo.toml`:
 ```toml
 [[menu.main]]
   identifier = "projetos"

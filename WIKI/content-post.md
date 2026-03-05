@@ -1,4 +1,4 @@
-# exampleSite/content/post/
+# site/content/post/
 
 Aqui ficam todos os **posts do blog**.
 Cada arquivo `.md` é um post publicado.

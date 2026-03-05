@@ -1,4 +1,4 @@
-# exampleSite/content/
+# site/content/
 
 Aqui ficam **todos os textos do blog** — posts, páginas e seções da homepage.
 É a pasta que você vai editar com mais frequência.

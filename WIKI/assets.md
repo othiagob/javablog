@@ -18,7 +18,7 @@ app.css  →  PostCSS (Tailwind)  →  main.css  →  usado pelo Hugo no build
 
 ## Exemplos de customização
 
-Para mudar a cor do tema, edite `exampleSite/hugo.toml`:
+Para mudar a cor do tema, edite `site/hugo.toml`:
 ```toml
 [params]
   color = 'linen'  # opções: linen, wheat, gray, light

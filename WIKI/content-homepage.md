@@ -1,4 +1,4 @@
-# exampleSite/content/homepage/
+# site/content/homepage/
 
 Contém as seções de texto que aparecem na **página inicial** do blog,
 logo abaixo do avatar/bio, antes da lista de posts.

@@ -8,10 +8,10 @@ o que cada arquivo faz, o que pode ser editado e o risco de cada mudança.
 | Arquivo | Pasta documentada |
 |---------|-------------------|
 | [assets.md](./assets.md) | `assets/` — CSS e estilos |
-| [exampleSite.md](./exampleSite.md) | `exampleSite/` — configuração principal |
-| [content.md](./content.md) | `exampleSite/content/` — páginas e posts |
-| [content-homepage.md](./content-homepage.md) | `exampleSite/content/homepage/` — seções da homepage |
-| [content-post.md](./content-post.md) | `exampleSite/content/post/` — posts do blog |
+| [site.md](./site.md) | `site/` — configuração principal |
+| [content.md](./content.md) | `site/content/` — páginas e posts |
+| [content-homepage.md](./content-homepage.md) | `site/content/homepage/` — seções da homepage |
+| [content-post.md](./content-post.md) | `site/content/post/` — posts do blog |
 | [i18n.md](./i18n.md) | `i18n/` — traduções da interface |
 | [layouts.md](./layouts.md) | `layouts/` — templates HTML (visão geral) |
 | [layouts-default.md](./layouts-default.md) | `layouts/_default/` — templates principais |
@@ -22,7 +22,7 @@ o que cada arquivo faz, o que pode ser editado e o risco de cada mudança.
 
 ## Regra de ouro
 
-**Para o dia a dia** (escrever posts, mudar nome/bio): edite apenas `exampleSite/`.
+**Para o dia a dia** (escrever posts, mudar nome/bio): edite apenas `site/`.
 
 **Para mudar o visual**: edite `assets/app.css` ou os parâmetros de cor no `hugo.toml`.
 

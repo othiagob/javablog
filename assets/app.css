@@ -11,6 +11,14 @@
 
 @theme {
   --w: calc(680px + 32px * 2);
+  --font-serif: Merriweather, Georgia, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-serif;
+  }
 }
 
 @utility dark-bg {
