@@ -21,9 +21,9 @@ ignoreErrors = ["error-remote-getjson"]
   github = 'othiagob'
   monoDarkIcon = true
 
-  avatar = ''
-  name = 'Thiago B.'
-  bio = 'Dev backend Java.'
+  avatar = 'https://www.oracle.com/webfolder/technetwork/java/javase/documentation/docs-supplementary/images/java-logo.png'
+  name = ''
+  bio = ''
 # ------------------------------
 
 # Necessário para renderizar HTML direto no Markdown (<sub>, <sup>, <kbd>, <mark>)
