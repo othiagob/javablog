@@ -4,6 +4,8 @@ Blog pessoal de Thiago B. — programação, Java e Tibia.
 
 **Acesse:** https://othiagob.github.io/javac/
 
+> ✨ **Última atualização:** 05/03/2026 - Reorganização estrutural concluída
+
 ---
 
 ## 🚀 Quick Start
