@@ -1,9 +1,9 @@
 /* Place custom css here. */
 @reference './app.css';
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
 
 :root {
-	--font-sans: 'Nunito', 'Ubuntu', ui-sans-serif, -apple-system, 'Segoe UI', sans-serif;
+	--font-sans: 'Ubuntu', ui-sans-serif, -apple-system, 'Segoe UI', sans-serif;
 	--default-font-family: var(--font-sans);
 	--dot-size: 22px;
 	--dot-opacity-light: 0.11;
@@ -24,6 +24,13 @@ body {
 .dark body {
 	background-color: rgb(9 9 11);
 	background-image: radial-gradient(circle at 1px 1px, rgb(248 250 252 / var(--dot-opacity-dark)) 1px, transparent 0);
+	background-size: var(--dot-size) var(--dot-size);
+}
+
+/* Keep dotted texture visible behind the dark overlay layer used by the theme. */
+.dark body::before {
+	background-color: rgb(0 0 0 / 0.85) !important;
+	background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.12) 1px, transparent 0);
 	background-size: var(--dot-size) var(--dot-size);
 }
 

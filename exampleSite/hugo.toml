@@ -23,7 +23,7 @@ ignoreErrors = ["error-remote-getjson"]
 
   avatar = ''
   name = 'Thiago B.'
-  bio = 'Desenvolvedor em formação. Escrevo sobre programação e Tibia.'
+  bio = 'Dev backend Java.'
 # ------------------------------
 
 # Necessário para renderizar HTML direto no Markdown (<sub>, <sup>, <kbd>, <mark>)
