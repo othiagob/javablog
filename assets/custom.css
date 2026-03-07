@@ -1,11 +1,10 @@
 /* Place custom css here. */
-@reference './app.css';
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
 
 :root:not(#\#),
 :host:not(#\#) {
-	--font-sans: 'Merriweather', Georgia, serif;
-	--font-serif: 'Merriweather', Georgia, serif;
+	--font-sans: 'Merriweather', 'Noto Serif', 'Liberation Serif', Georgia, 'Times New Roman', serif;
+	--font-serif: 'Merriweather', 'Noto Serif', 'Liberation Serif', Georgia, 'Times New Roman', serif;
 	--default-font-family: var(--font-sans);
 	--default-mono-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 	--dot-size: 22px;
@@ -16,7 +15,7 @@
 html,
 body,
 body * {
-	font-family: 'Merriweather', Georgia, serif !important;
+	font-family: 'Merriweather', 'Noto Serif', 'Liberation Serif', Georgia, 'Times New Roman', serif !important;
 }
 
 body {
